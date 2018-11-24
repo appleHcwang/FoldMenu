@@ -8,9 +8,8 @@
 
 
 #import <UIKit/UIKit.h>
-@class IFLYFoldMenuView;
 @protocol IFLYFoldMenuViewDelegate <NSObject>
-- (void)foldMenuView:(IFLYFoldMenuView *)button clickButtonAtIndex:(int)index;
+- (void)foldMenuView:(UIButton *)button clickButtonAtIndex:(int)index;
 @end
 @interface IFLYFoldMenuView : UIButton
 //初始化方法，设置button打开后一共显示几个button

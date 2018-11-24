@@ -12,6 +12,7 @@
     NSArray             *_titleArray;
     BOOL                 _isHorizontal;
     IFLYFoldMenuView        *_IFLYFoldMenuView;
+    UILabel * titleLabel;
 }
 
 @end
@@ -20,6 +21,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 100, 200, 50)];
+    [self.view addSubview:titleLabel];
+    titleLabel.text = @"demo";
     _titleArray = @[@"写医嘱",@"写病历",@"发起会诊",@"写备注"];
     self.view.backgroundColor = [UIColor whiteColor];
     _IFLYFoldMenuView = [[IFLYFoldMenuView alloc] initWithTitleArray:_titleArray WithFrame:CGRectMake(CGRectGetWidth(self.view.frame) - 65, CGRectGetHeight(self.view.frame) - 90, 50, 50) delegate:self];
@@ -32,9 +37,8 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
-- (void)foldMenuView:(IFLYFoldMenuView *)button clickButtonAtIndex:(int)index {
- 
-    
+- (void)foldMenuView:(UIButton *)button clickButtonAtIndex:(int)index {
+    titleLabel.text = button.titleLabel.text;
 }
 
 

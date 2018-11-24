@@ -40,8 +40,6 @@
         button.hidden = YES;
         [_buttonArray addObject:button];
     }
-    
-    
 }
 
 - (void)buttonClick:(UIButton *)sender {
@@ -49,8 +47,6 @@
         [UIView animateWithDuration:0.2 animations:^{
             self.transform = CGAffineTransformMakeRotation(M_PI_4);
         }];
-        
-        
         self.isOpen = YES;
         [self onTheMenu:sender];
     }
@@ -79,6 +75,8 @@
         self.isOpen = NO;
     }
     [self packUptheMenu:sender];
+    //调用delegate方法
+    [_delegate foldMenuView:sender clickButtonAtIndex:(int)sender.tag];
 }
 
 - (void)onTheMenu:(UIButton *)sender {
@@ -87,7 +85,7 @@
         UIButton *but = [_buttonArray objectAtIndex:i];
         [self.superview addSubview:but];
         but.hidden = NO;
-        but.frame = CGRectMake(CGRectGetMaxX(self.rect) - self.menuWidth, self.rect.origin.y, self.menuWidth, self.menuHeight);
+        but.frame = CGRectMake(CGRectGetMaxX(self.rect) - self.menuWidth, self.rect.origin.y -  self.menuHeight, self.menuWidth, self.menuHeight);
         but.layer.cornerRadius = CGRectGetHeight(but.frame)/2.f;
         but.layer.masksToBounds = YES;
     }
@@ -109,7 +107,7 @@
     [UIView animateWithDuration:0.2 animations:^{
         for (int i = 0; i<_buttonCount; i++) {
             UIButton *but = [_buttonArray objectAtIndex:i];
-            but.frame = CGRectMake(CGRectGetMaxX(self.rect) - self.menuWidth, self.rect.origin.y, self.menuWidth, self.menuHeight);
+            but.frame = CGRectMake(CGRectGetMaxX(self.rect) - self.menuWidth, self.rect.origin.y - self.menuHeight, self.menuWidth, self.menuHeight);
         }
     } completion:^(BOOL finished) {
         for (int i = 0; i<_buttonCount; i++) {
@@ -118,8 +116,6 @@
             [but removeFromSuperview];
         }
     }];
-    //调用delegate方法
-    [_delegate foldMenuView:self clickButtonAtIndex:(int)sender.tag];
 }
 
 
